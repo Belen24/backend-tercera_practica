@@ -14,6 +14,10 @@ const productsSchema =  new mongoose.Schema({
         type:String,
         required:true,
         enum: ["Pulsera","Anillo","Aros"],
+    },
+    owner:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref: "users"
     }
 });
 

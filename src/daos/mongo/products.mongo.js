@@ -50,7 +50,7 @@ export class ProductsMongo{
     async deleteProduct(id){
         try {
             await this.model.findByIdAndDelete(id);
-            return {message: "producto eliminado"};
+            return "Producto eliminado";
         } catch (error) {
             throw new Error(`Error al eliminar el producto ${error.message}`);
         }
