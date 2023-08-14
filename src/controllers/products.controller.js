@@ -12,7 +12,7 @@ export class ProductsController{
         }
     };
 
-    static getProduct = async(req,res)=>{
+    static getProductById = async(req,res)=>{
         try {
             const productId = req.params.pid;
             const product = await ProductsService.getProductById(productId)

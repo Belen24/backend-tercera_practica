@@ -49,17 +49,7 @@ export class CartsMongo{
         
     };
 
-    /*async addProduct(cid,pid){
-        try {
-            const cart = await this.get(cid);
-            cart.products.push({pid:pid, quantity:1});
-            console.log("cart", cart);
-            const result = await this.model.findByIdAndUpdate(cid,cart,{new:true});
-            return result;
-        } catch (error) {
-            throw new Error(`Error al agregar el producto ${error.message}`);
-        }
-    };*/
+ 
     async addProduct(cid, pid) {
         //console.log(pid);
         
@@ -152,7 +142,7 @@ export class CartsMongo{
        }
     };
     
-    /*async deleteCart(cid){
+    async deleteCart(cid){
         try {
             await this.model.findByIdAndDelete(cid);
             return {message: "Carrito eliminado"};
@@ -160,33 +150,37 @@ export class CartsMongo{
             throw new Error(`Error al eliminar el carrito ${error.message}`);
         }
     
-    };*/
+    };
 
     
-
-    /*async updateCart(cartId, productId, quantity){
+    
+    async deleteProduct(cid, pid){
         try {
-            const cart = await this.model.findById(cartId);
-            if (!cart) {
-              throw new Error("El carrito no existe");
+            const cart = await this.model.findById(cid);
+
+            if (!cart){
+                throw new Error ("El carrito no existe");
             }
-        
-            const product = cart.products.find(
-              (product) => product._id.toString() === productId.toString()
-            );
-            if (!product) {
-              throw new Error("El producto no existe en el carrito");
-            }
-        
-            product.quantity = quantity;
-            await cart.save();
-        
-            return cart;
+
+            const productIndex = cart.products.findIndex(
+                (product) => product._id.toString() === pid.toString()
+              );
+              console.log(productIndex)
+              if (productIndex !== -1) {
+                throw new Error("El producto no existe en el carrito");
+              }
+          
+              cart.products.splice(productIndex, 1);
+              await cart.save();
+          
+              return { message: "Producto eliminado del carrito" };
+
         } catch (error) {
-            throw new Error(`Error al actualizar el carrito ${error.message}`);
+            throw new Error(`Error al eliminar el carrito ${error.message}`);
         }
-    }; */ 
     
+    };
+
 
 };
 
