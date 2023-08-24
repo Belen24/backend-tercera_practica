@@ -68,4 +68,6 @@ app.use (errorHandler);
 app.use ("/documentation",swaggerUI.serve,swaggerUI.setup(swaggerSpecs))
 
 
+export {app}
+
 

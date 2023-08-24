@@ -12,8 +12,8 @@ export class SessionsController{
     };
 
     static loginUsers = (req,res)=>{
-        res.redirect("/profile");
-        //res.send("login exitoso;")
+        //res.redirect("/profile");
+        res.send("login exitoso;")
     };
 
     static failLogin = (req,res)=>{
